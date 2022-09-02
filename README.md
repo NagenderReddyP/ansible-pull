@@ -1,2 +1,2 @@
 # ansible-pull
-Tutorial to test ansible pull command
+Test ansible pull command
