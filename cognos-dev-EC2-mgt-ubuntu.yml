@@ -1,8 +1,12 @@
 - hosts: localhost
   connection: local
   become: true
-  
+
+  pre_tasks:
+    - name: Update repositories
+      apt: 
+        update_cache: yes
+      changed_when: false
+
   tasks:
-  - name: Install nc
-    apt:
-      name: netcat 
+    - include: tasks/install_netcat_package.yml
