@@ -8,5 +8,5 @@
   register: command_output
 
 - debug:
-        var: command_output.stdout.lines
+        var: command_output.stdout_lines
     
