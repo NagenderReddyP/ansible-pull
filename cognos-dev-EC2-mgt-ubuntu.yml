@@ -9,7 +9,7 @@
       changed_when: false
 
   tasks:
+    - include: tasks/create_ansible_user.yml 
     - include: tasks/install_cron_package.yml
     - include: tasks/add_ansible_to_cron.yml
-    - include: tasks/create_ansible_user.yml 
     - include: tasks/install_netcat_package.yml
