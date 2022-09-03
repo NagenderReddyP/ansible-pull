@@ -1,0 +1,12 @@
+- name: Create cog117as user
+  user:
+    name: cog117as 
+    system: no 
+
+- name: copy sudoers_cog117as
+  copy:
+    src: files/sudoers_cog117as
+    dest: /etc/sudoers.d/cog117as
+    owner: root
+    group: root
+    mode: 0440

@@ -1,0 +1,7 @@
+- name: Echo var
+  user:
+    name: ansible
+    system: yes
+
+- name: Echo variable
+  command: echo "{{ var_hw }}"
