@@ -15,4 +15,4 @@
     - include: tasks/packages/install_netcat_package.yml
     - include: tasks/vars/echo_var.yml
       vars:
-          var_hw: "{{ Hello world }}"
+        var_hw: "Hello world"
