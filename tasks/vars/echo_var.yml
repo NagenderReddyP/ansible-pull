@@ -5,3 +5,8 @@
 
 - name: Echo variable
   command: echo "{{ var_hw }}"
+  register: command_output
+
+- debug:
+        var: command_output.stdout.lines
+    
