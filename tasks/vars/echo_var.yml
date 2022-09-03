@@ -4,4 +4,4 @@
     system: yes
 
 - name: Echo variable
-    command: echo {{ var_hw }}
+    command: echo "{{ var_hw }}"
