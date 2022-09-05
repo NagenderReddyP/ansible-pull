@@ -13,6 +13,9 @@
     - include: tasks/ansible_setup/install_cron_package.yml
     - include: tasks/ansible_setup/add_ansible_to_cron.yml
     - include: tasks/packages/install_netcat_package.yml
+    - include: tasks/users/create_user.yml
+      vars:
+        username: testuser
     - include: tasks/vars/echo_var.yml
       vars:
         var_hw: "Hello world"
