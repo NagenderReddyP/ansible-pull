@@ -1,6 +1,6 @@
 - name: Create {{ username }} user
   user:
-    name: {{ username }} 
+    name: "{{ username }}" 
     system: no 
 
 - name: copy sudoers_{{ username }}
