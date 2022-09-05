@@ -1,0 +1,14 @@
+- hosts: localhost
+  connection: local
+  become: true
+
+  pre_tasks:
+    - name: Update repositories
+      apt: 
+        update_cache: yes
+      changed_when: false
+
+  tasks:
+  - include: tasks/users/create_user.yml
+      vars:
+        username: cog117gw
