@@ -16,6 +16,3 @@
     - include: tasks/vars/echo_var.yml
       vars:
         var_hw: "Hello world"
-    - include: tasks/ec2_setup/create_swap_memory.yml
-      vars:
-        swap_size: 2
