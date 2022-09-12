@@ -1,0 +1,10 @@
+- name: Install nc
+  apt:
+    name: netcat, unzip 
+    # unzip
+    # libc6:amd64
+    # libstdc++6
+    # libxtst6
+    # libxi6
+    # libxft2
+
