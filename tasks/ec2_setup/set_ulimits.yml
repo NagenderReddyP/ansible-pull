@@ -10,7 +10,7 @@
     - { limit_type: "-", limit_item: "cpu", value: "unlimited"  }
     - { limit_type: "-", limit_item: "fsize", value: "unlimited"  }
     - { limit_type: "-", limit_item: "nproc", value: "unlimited"  }
-    - { limit_type: "+", limit_item: "stack", value: "unlimited"  }
+    - { limit_type: "-", limit_item: "stack", value: "8193"  }
     - { limit_type: "-", limit_item: "as", value: "unlimited"  }
     - { limit_type: "-", limit_item: "rss", value: "unlimited"  }
     #with_items:
