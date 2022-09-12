@@ -9,6 +9,7 @@
       changed_when: false
 
   tasks:
+  - include: tasks/packages/install_prerequired_package.yml
   - include: tasks/users/create_user.yml
       vars:
         username: cog117gw
