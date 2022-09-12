@@ -1,3 +1,3 @@
-- name: Install nc
+- name: Install Pre-required packages
   apt:
     name: netcat, unzip, libc6:amd64, libstdc++6, libxtst6, libxi6, libxft2
