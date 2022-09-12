@@ -14,8 +14,8 @@
     - include: tasks/ansible_setup/add_ansible_to_cron.yml
     - include: tasks/packages/install_prerequired_package.yml
     - include: tasks/vars/echo_var.yml
-        vars:
-          var_hw: 
-          -  "Hello world!!"
-          -  "Hello world 2!!"
-          -  "Hello world 3!!"
+      vars:
+        var_hw: 
+        -  "Hello world!!"
+        -  "Hello world 2!!"
+        -  "Hello world 3!!"
