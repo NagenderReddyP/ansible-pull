@@ -1,4 +1,4 @@
-- name: Setting-up nofles and nproc limit for db_user
+- name: Setting-up nofles and nproc limit for {{ user }} 
   pam_limits:
     domain: "{{ item }}"
     limit_type: "{{item.limit_type}}"
