@@ -1,8 +1,8 @@
 - name: Setting-up nofles and nproc limit for {{ user }} 
   pam_limits:
     domain: "{{ item }}"
-    limit_type: "{{item.limit_type}}"
-    limit_item: "{{item.limit_item}}"
+    limit_type: "{{ item.limit_type | string }}"
+    limit_item: "{{ item.limit_item | string }}"
     value: "{{item.value}}"
   loop:
     # Add nofile and nproc, both soft and hard, limit for the user db_user with a comment.
