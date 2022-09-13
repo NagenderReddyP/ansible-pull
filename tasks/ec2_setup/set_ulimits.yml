@@ -1,6 +1,6 @@
 - name: Setting-up nofles and nproc limit for {{ user }} 
   pam_limits:
-    domain: testuser #"{{ item }}"
+    domain: "{{ user }}"
     limit_type: "{{ item.limit_type }}"
     limit_item: "{{ item.limit_item }}"
     value: "{{item.value}}"
