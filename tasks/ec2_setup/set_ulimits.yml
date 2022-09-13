@@ -11,6 +11,8 @@
     - { limit_type: '-', limit_item: 'cpu', value: 'unlimited'  }
     - { limit_type: '-', limit_item: 'fsize', value: 'unlimited'  }
     - { limit_type: '-', limit_item: 'nproc', value: 'unlimited'  }
-    - { limit_type: 'hard', limit_item: 'stack', value: 'unlimited'  }
+    - { limit_type: '-', limit_item: 'stack', value: 'unlimited'  }
     - { limit_type: '-', limit_item: 'as', value: 'unlimited'  }
     - { limit_type: '-', limit_item: 'rss', value: 'unlimited'  }
+ - name: reload settings from all system configuration files
+   shell: sysctl --system
