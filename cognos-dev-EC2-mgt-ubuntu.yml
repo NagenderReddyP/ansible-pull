@@ -15,5 +15,4 @@
     - include: tasks/packages/install_prerequired_package.yml
     - include: tasks/ec2_setup/set_ulimits.yml
       vars:
-        user: 
-        -  "testuser"
+        user: "root" 
