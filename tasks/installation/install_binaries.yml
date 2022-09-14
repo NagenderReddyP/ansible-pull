@@ -1,6 +1,6 @@
 - name: Create a directory for application
   ansible.builtin.file:
-    path: /appl
+    path: /opt/appl
     state: directory
     owner: root
     group: root
@@ -8,8 +8,34 @@
 
 - name: Create a directory for application
   ansible.builtin.file:
-    path: /appl/cog117cm
+    path: /opt/appl/cog117cm
+    state: directory
+    owner: cog117cm
+    group: cog117cm
+    mode: '0755'
+
+- name: Create a directory for application
+  ansible.builtin.file:
+    path: /opt/appl/cog117as
+    state: directory
+    owner: cog117as
+    group: cog117as
+    mode: '0755'
+
+- name: Create a directory for application
+  ansible.builtin.file:
+    path: /opt/appl/sources
     state: directory
     owner: root
     group: root
     mode: '0755'
+
+- name: This command will change the working directory to somedir/
+  ansible.builtin.shell:
+    chdir: /opt/appl/sources
+    cmd: aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin .
+
+- name: This command will change the working directory to somedir/
+  ansible.builtin.shell:
+    chdir: /opt/appl/sources
+    cmd: awss3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip . 
