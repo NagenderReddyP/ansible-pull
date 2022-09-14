@@ -35,13 +35,13 @@
   args:
     chdir: /opt/appl/sources
 
-- name: Copy sources from S3
-  shell: aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip .
-  args:
-    chdir: /opt/appl/sources
+    #- name: Copy sources from S3
+    #shell: aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip .
+    #args:
+    #chdir: /opt/appl/sources
 
 - file:
-    path: /opt/appl/analytics-installer-2.2.16-linuxx86.bin 
+    path: /opt/appl/sources/analytics-installer-2.2.16-linuxx86.bin 
     owner: root 
     group: root
     mode: 0777
