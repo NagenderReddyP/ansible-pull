@@ -31,7 +31,6 @@
     mode: '0755'
 
 - name: Copy analytic installer from s3
-  #shell: aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin .
   shell: aws s3 cp "{{ item }}" .
   args:
     chdir: /opt/appl/sources
@@ -47,3 +46,5 @@
     owner: root 
     group: root
     mode: 0777
+
+#shell: aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin .
