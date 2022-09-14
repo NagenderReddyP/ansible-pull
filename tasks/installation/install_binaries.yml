@@ -29,15 +29,14 @@
     owner: root
     group: root
     mode: '0755'
-/*
+
 - name: Copy analytic installer from s3
   shell: "aws s3 cp {{ item }} ."
   with_items:
     - "s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin"
-    - "s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip"
+      #- "s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip"
   args: 
     chdir: "/opt/appl/sources"
-*/
 
 - file:
     path: "/opt/appl/sources/{{ item }}"
