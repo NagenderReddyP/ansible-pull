@@ -37,5 +37,5 @@
 
 - name: Copy sources from S3 
   ansible.builtin.shell:
-    cmd: awss3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip . 
+    cmd: aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip . 
     chdir: /opt/appl/sources
