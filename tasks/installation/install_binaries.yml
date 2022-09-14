@@ -31,11 +31,9 @@
     mode: '0755'
 
 - name: Copy analytic installer from s3
-  ansible.builtin.shell:
-    cmd: aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin .
+  command: cd /opt/appl/source/ && aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin .
     chdir: /opt/appl/sources
 
 - name: Copy sources from S3 
-  ansible.builtin.shell:
-    cmd: aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip . 
+  command: cd /opt/appl/source/ && aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip . 
     chdir: /opt/appl/sources
