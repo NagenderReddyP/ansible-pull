@@ -6,21 +6,21 @@
     group: root
     mode: '0755'
 
-    #- name: Create a directory for application
-    #ansible.builtin.file:
-    #path: /opt/appl/cog117cm
-    #state: directory
-    #owner: cog117cm
-    #group: cog117cm
-    #mode: '0755'
+- name: Create a directory for application
+  ansible.builtin.file:
+    path: /opt/appl/cog117cm
+    state: directory
+    owner: cog117cm
+    group: cog117cm
+    mode: '0755'
 
-    #- name: Create a directory for application
-    #ansible.builtin.file:
-    #path: /opt/appl/cog117as
-    #state: directory
-    #owner: cog117as
-    #group: cog117as
-    #mode: '0755'
+- name: Create a directory for application
+  ansible.builtin.file:
+    path: /opt/appl/cog117as
+    state: directory
+    owner: cog117as
+    group: cog117as
+    mode: '0755'
 
 - name: Create a directory for application
   ansible.builtin.file:
