@@ -4,16 +4,14 @@
     limit_type: "{{ item.limit_type }}"
     limit_item: "{{ item.limit_item }}"
     value: "{{item.value}}"
-    #loop:
   with_items:
-    # Add nofile and nproc, both soft and hard, limit for the user db_user with a comment.
-    # Type "-" for enforcing both soft and hard resource limits together for more details read `man limits.conf`.
     - { limit_type: '-', limit_item: 'cpu', value: 'unlimited'  }
     - { limit_type: '-', limit_item: 'fsize', value: 'unlimited'  }
     - { limit_type: '-', limit_item: 'nproc', value: 'unlimited'  }
     - { limit_type: '-', limit_item: 'stack', value: 'unlimited'  }
     - { limit_type: '-', limit_item: 'as', value: 'unlimited'  }
     - { limit_type: '-', limit_item: 'rss', value: 'unlimited'  }
+
 - name: Update /etc/security/limits.conf
   lineinfile:
     path: /etc/security/limits.conf
@@ -26,7 +24,6 @@
   - 'cog117cm hard nofile 65536'
   - 'cog117as soft nofile 32768'
   - 'cog117as hard nofile 65536'
-
 
 - name: reload settings from all system configuration files
   shell: sysctl --system
