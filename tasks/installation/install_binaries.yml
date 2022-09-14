@@ -33,8 +33,8 @@
 - name: Copy analytic installer from s3
   shell: "aws s3 cp {{ item }} ."
   with/items:
-  - "s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin"
-  - "s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin"
+    - "s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin"
+    - "s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin"
   vars:
     chdir: "/opt/appl/sources"
     #- name: Copy sources from S3
