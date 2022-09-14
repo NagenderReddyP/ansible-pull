@@ -30,12 +30,12 @@
     group: root
     mode: '0755'
 
-- name: This command will change the working directory to somedir/
+- name: Copy analytic installer from s3
   ansible.builtin.shell:
     chdir: /opt/appl/sources
     cmd: aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/analytics-installer-2.2.16-linuxx86.bin .
 
-- name: This command will change the working directory to somedir/
+- name: Copy sources from S3 
   ansible.builtin.shell:
     chdir: /opt/appl/sources
     cmd: awss3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/casrv-11.1.7-2205311318-linuxi38664h.zip . 
