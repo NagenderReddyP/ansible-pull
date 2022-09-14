@@ -31,7 +31,7 @@
     mode: '0755'
 
 - name: Copy analytic installer from s3
-  shell: aws s3 cp "{{ item }}" .
+  shell: "aws s3 cp {{ item }} ."
   args:
     chdir: /opt/appl/sources
   with/items:
