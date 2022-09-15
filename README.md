@@ -1,2 +1,2 @@
 # ansible-pull
-Test ansible pull command
+Scripts using ansible pull command mode to install cognos server on AWS
