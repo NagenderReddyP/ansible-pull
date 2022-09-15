@@ -55,3 +55,8 @@
     - "GWInstall.properties"
   args:
     chdir: "/opt/appl/sources"
+
+
+- name: Run installer
+  shell: "./analytics-installer-2.2.16-linuxx86.bin -f /appl/sources/CMInstall.properties -i silent"
+  become_user: cog117cm
