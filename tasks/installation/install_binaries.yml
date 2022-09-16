@@ -83,3 +83,9 @@
     - "ojdbc8.jar"
   args:
     chdir: "/opt/appl/cog117cm/drivers"
+
+- name: Take a backup of cogstartup.xml in the path /appl/cog117cm/configuration
+  copy:
+  src: /appl/cog117cm/configuration/cogstartup.xml 
+  dest: /appl/cog117cm/configuration/cogstartup.xml.bkp
+  delegate_to: localhost
