@@ -82,9 +82,9 @@
 
 - name: Take a backup of cogstartup.xml in the path /appl/cog117cm/configuration
   copy:
-  src: /appl/cog117cm/configuration/cogstartup.xml 
-  dest: /appl/cog117cm/configuration/cogstartup.xml.bkp
-  delegate_to: localhost
+    src: /appl/cog117cm/configuration/cogstartup.xml 
+    dest: /appl/cog117cm/configuration/cogstartup.xml.bkp
+    delegate_to: localhost
 
 - name: Copy the Config file from S3 bucket to /appl/co117cm/configuration/
   shell: "aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/CM1Config.xml /appl/cog117cm/configuration/cogstartup.xml"
