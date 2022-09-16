@@ -6,21 +6,21 @@
     group: root
     mode: '0755'
 
-    #- name: Create a directory for application
-    #ansible.builtin.file:
-    #path: /opt/appl/cog117cm
-    #state: directory
-    #owner: cog117cm
-    #group: cog117cm
-    #mode: '0755'
+- name: Create a directory for application
+  ansible.builtin.file:
+  path: /opt/appl/cog117cm
+  state: directory
+  owner: cog117cm
+  group: cog117cm
+  mode: '0755'
 
-    #- name: Create a directory for application
-    #ansible.builtin.file:
-    #path: /opt/appl/cog117as
-    #state: directory
-    #owner: cog117as
-    #group: cog117as
-    #mode: '0755'
+- name: Create a directory for application
+  ansible.builtin.file:
+  path: /opt/appl/cog117as
+  state: directory
+  owner: cog117as
+  group: cog117as
+  mode: '0755'
 
 - name: Create a directory for application
   ansible.builtin.file:
@@ -65,10 +65,6 @@
   shell: "./analytics-installer-2.2.16-linuxx86.bin -f /appl/sources/ASInstall.properties -i silent"
   become_user: cog117as
 
-- name: Run Analytics installer for Gateway
-  shell: "./analytics-installer-2.2.16-linuxx86.bin -f /appl/sources/GWInstall.properties -i silent"
-  become_user: cog117gw
-
 - name: Create a directory for drivers
   ansible.builtin.file:
     path: /opt/appl/cog117cm/drivers
@@ -83,3 +79,15 @@
     - "ojdbc8.jar"
   args:
     chdir: "/opt/appl/cog117cm/drivers"
+
+- name: Take a backup of cogstartup.xml in the path /appl/cog117cm/configuration
+  copy:
+  src: /appl/cog117cm/configuration/cogstartup.xml 
+  dest: /appl/cog117cm/configuration/cogstartup.xml.bkp
+  delegate_to: localhost
+
+- name: Copy the Config file from S3 bucket to /appl/co117cm/configuration/
+  shell: "aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/CM1Config.xml /appl/cog117cm/configuration/cogstartup.xml"
+
+- name: Copy the Config file from S3 bucket to /appl/co117as/configuration/
+  shell: "aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml /appl/cog117as/configuration/cogstartup.xml"
