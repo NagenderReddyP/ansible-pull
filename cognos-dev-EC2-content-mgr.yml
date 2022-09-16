@@ -19,4 +19,4 @@
     - include: tasks/users/create_user.yml
       vars:
         username: cog117as
-        - include: tasks/installation/install_binaries_CM.yml
+    - include: tasks/installation/install_binaries_CM.yml
