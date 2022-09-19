@@ -6,6 +6,7 @@
           #regexp: "^(.*)secure_path(.*)$"
           #line: '\1:/usr/local/bin\2'
   lineinfile:
+    path: '/etc/sudoers.bkp'
     regexp: '^(secure_path.*)$'
     backrefs: yes
     line: '\1:/usr/local/bin'
