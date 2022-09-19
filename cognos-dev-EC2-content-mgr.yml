@@ -9,6 +9,7 @@
       changed_when: false
 
   tasks:
+    - include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
     - include: tasks/ec2_setup/create_swap_memory.yml
       vars:
         swap_size: 24

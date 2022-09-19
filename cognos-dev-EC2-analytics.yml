@@ -9,6 +9,7 @@
       changed_when: false
 
   tasks:
+    - include: tasks/ansible_setup/create_ansible_user.yml
     - include: tasks/ec2_setup/create_swap_memory.yml
       vars:
         swap_size: 24
