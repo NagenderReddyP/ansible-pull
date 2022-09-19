@@ -14,4 +14,4 @@
     regexp: '^(.*secure_path.*)'
     backrefs: yes
     line: '\1:/usr/local/bin'
-    when: path_exists.stdout == "0"
+  when: path_exists.stdout == "0"
