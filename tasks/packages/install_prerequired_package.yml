@@ -1,3 +1,14 @@
-- name: Install Pre-required packages
-  apt:
-    name: netcat, unzip, libc6:amd64, libstdc++6, libxtst6, libxi6, libxft2
+#- name: Install Pre-required packages
+#  apt:
+#    name: netcat, unzip, libc6:amd64, libstdc++6, libxtst6, libxi6, libxft2
+- name: Install the latest version of Apache and MariaDB
+  ansible.builtin.package:
+    name:
+      - netcat
+      - unzip
+      - libc6:amd64
+      - libstdc++6
+      - libxtst6
+      - libxi6
+      - libxft2
+    state: latest
