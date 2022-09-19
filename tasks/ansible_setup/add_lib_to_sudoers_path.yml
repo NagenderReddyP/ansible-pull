@@ -4,4 +4,4 @@
     path: /etc/sudoers.bkp
     backrefs: yes
     regexp: "^(.*)secure_path(.*)$"
-    line: '\1:/usr/local/bin'
+    line: '\1:/usr/local/bin\2'
