@@ -3,5 +3,5 @@
           #line: "Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin""
     path: /etc/sudoers
     backrefs: yes
-    regexp: "^(.*.secure_path*)$"
-    line: '\1,:/usr/local/bin'
+    regexp: "^(.*)secure_path(.*)$"
+    line: '\1:/usr/local/bin'
