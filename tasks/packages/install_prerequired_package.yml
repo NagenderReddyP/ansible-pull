@@ -4,11 +4,22 @@
 - name: Install the latest version of Apache and MariaDB
   ansible.builtin.package:
     name:
-      - netcat
-      - unzip
-      - libc6:amd64
-      - libstdc++6
-      - libxtst6
-      - libxi6
-      - libxft2
+      - unzip-6.0-41.el8.x86_64 
+      - libstdc++.x86_64 libstdc++.i686 
+      - glibc.x86_64 glibc.i686 
+      - libXaw 
+      - libXtst 
+      - libXi 
+      - libX11.x86_64 
+      - libX11.i686 
+      - motif.x86_64 
+      - motif.i686 
+      - libXft.x86_64 
+      - libXft.i686 
+      - nss.x86_64 
+      - nss.i686 
+      - nspr.x86_64 
+      - nspr.i686 
+      - libnsl.x86_64 
+      - libnsl.i686
     state: latest
