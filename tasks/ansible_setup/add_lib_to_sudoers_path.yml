@@ -1,12 +1,17 @@
-- name: Add /usr/local/bin/ path to sudoers
+#- name: Add /usr/local/bin/ path to sudoers
   #lineinfile:
           #line: "Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin""
           #  path: '/etc/sudoers.bkp'
           #backrefs: yes
           #regexp: "^(.*)secure_path(.*)$"
           #line: '\1:/usr/local/bin\2'
+- name: Test for line
+  shell: grep  "secure_path" /etc/sudoers.bkp | grep "/usr/local/bin" || true
+  register: path_exists 
+- name: Add /usr/local/bin/ path to sudoers
   lineinfile:
     path: '/etc/sudoers.bkp'
     regexp: '^(.*secure_path.*)'
     backrefs: yes
     line: '\1:/usr/local/bin'
+    when: path_exists.stdout == "0"
