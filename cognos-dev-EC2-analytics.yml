@@ -4,13 +4,13 @@
 
   pre_tasks:
     - name: Update repositories
-      apt: 
+      yum: 
         update_cache: yes
       changed_when: false
 
   tasks:
     - include: tasks/ansible_setup/create_ansible_user.yml
-      #- include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
+    - include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
 
       #- include: tasks/ec2_setup/create_swap_memory.yml
       #vars:
