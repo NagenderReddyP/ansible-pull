@@ -3,6 +3,9 @@
   become: true
 
   tasks:
+    # ²Add /usr/local/lib to path for sudo
+    - include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
+    # Add swap memory and activate it
     - include: tasks/ec2_setup/create_swap_memory.yml
       vars:
         swap_size: 24
@@ -18,4 +21,4 @@
       vars:
         - user: "root"
         - nofile_limit_for: "cog117as"
-    - include: tasks/installation/install_binaries_AS.yml
+    #- include: tasks/installation/install_binaries_AS.yml
