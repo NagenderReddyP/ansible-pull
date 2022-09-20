@@ -68,11 +68,14 @@
   args:
     chdir: "/opt/appl/cog117as/drivers"
 
+- name: Copy the Config file from S3 bucket to /appl/co117as/configuration/
+  shell: "aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml /opt/appl/cog117as/configuration/cogstartup.xml"
+
 - name: Take a backup of cogstartup.xml in the path /opt/appl/cog117as/configuration
   copy:
     src: "/opt/appl/cog117as/configuration/cogstartup.xml"
     dest: "/opt/appl/cog117as/configuration/cogstartup.xml.bkp"
+    owner: "cog117as" 
+    group: "cog117as"
+    mode: 0644
     #delegate_to: "localhost"
-
-- name: Copy the Config file from S3 bucket to /appl/co117as/configuration/
-  shell: "aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml /opt/appl/cog117as/configuration/cogstartup.xml"
