@@ -10,7 +10,7 @@
   register: path_exists 
 - name: Add /usr/local/bin/ path to sudoers
   lineinfile:
-    path: '/etc/sudoers.bkp'
+    path: '/etc/sudoers'
     regexp: '^(.*secure_path.*)'
     backrefs: yes
     line: '\1:/usr/local/bin'
