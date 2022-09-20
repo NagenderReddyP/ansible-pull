@@ -21,4 +21,4 @@
       vars:
         - user: "root"
         - nofile_limit_for: "cog117as"
-    #- include: tasks/installation/install_binaries_AS.yml
+    - include: tasks/installation/install_binaries_AS.yml
