@@ -21,7 +21,7 @@
   - 'root soft nofile 32768'
   - 'root hard nofile 65536'
   - '{{ nofile_limit_for }} soft nofile 32768'
-  - '{{ nofile_limit_for }} soft nofile 32768'
+  - '{{ nofile_limit_for }} hard nofile 32768'
   #- 'cog117cm soft nofile 32768'
   #- 'cog117cm hard nofile 65536'
   #- 'cog117as soft nofile 32768'
