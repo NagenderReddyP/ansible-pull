@@ -16,6 +16,8 @@
     #- include: tasks/installation/install_binaries.yml
     - include: tasks/ec2_setup/set_ulimits.yml
       vars:
-        user: "root" 
+        - user: "root"
+        - nofile_limit_for: "cog117cm"
+
     #
     #    install_binaries.yml
