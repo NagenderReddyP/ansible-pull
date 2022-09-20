@@ -29,7 +29,7 @@
     - "casrv-11.1.7-2205311318-linuxi38664h.zip"
   args: 
     chdir: "/opt/appl/sources"
-  became_user: "cog117as"
+  become_user: "cog117as"
 
 - file:
     path: "/opt/appl/sources/{{ item }}"
