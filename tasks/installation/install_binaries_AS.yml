@@ -46,6 +46,7 @@
     - "ASInstall.properties"
   args:
     chdir: "/opt/appl/sources"
+  become_user: "cog117as"
 
 
     #- name: Run Analytics installer for application server
