@@ -72,7 +72,7 @@
   copy:
     src: "/opt/appl/cog117as/configuration/cogstartup.xml"
     dest: "/opt/appl/cog117as/configuration/cogstartup.xml.bkp"
-    delegate_to: "localhost"
+    #delegate_to: "localhost"
 
 - name: Copy the Config file from S3 bucket to /appl/co117as/configuration/
   shell: "aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml /opt/appl/cog117as/configuration/cogstartup.xml"
