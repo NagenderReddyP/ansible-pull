@@ -49,6 +49,7 @@
 
 - name: Run Analytics installer for application server
   shell: "./analytics-installer-2.2.16-linuxx86.bin -f /opt/appl/sources/ASInstall.properties -i silent"
+  chdir: "/opt/appl/sources/"
   become_user: "cog117as"
 
 - name: Create a directory for drivers
