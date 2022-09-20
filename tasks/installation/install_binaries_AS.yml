@@ -29,12 +29,12 @@
     - "casrv-11.1.7-2205311318-linuxi38664h.zip"
   args: 
     chdir: "/opt/appl/sources"
-  become_user: "cog117as"
+  become_user: "root"
 
 - file:
     path: "/opt/appl/sources/{{ item }}"
-    owner: "cog117as" 
-    group: "cog117as"
+    owner: "root" 
+    group: "root"
     mode: "0777"
   with_items:
     - "analytics-installer-2.2.16-linuxx86.bin"
@@ -46,7 +46,7 @@
     - "ASInstall.properties"
   args:
     chdir: "/opt/appl/sources"
-  become_user: "cog117as"
+  become_user: "root"
 
 
     #- name: Run Analytics installer for application server
