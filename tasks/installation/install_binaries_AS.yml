@@ -11,7 +11,7 @@
     path: "/opt/appl/cog117as"
     state: "directory"
     owner: "cog117as"
-    group: "cog117sa"
+    group: "cog117as"
     mode: "0755"
 
 - name: Create a directory for application
