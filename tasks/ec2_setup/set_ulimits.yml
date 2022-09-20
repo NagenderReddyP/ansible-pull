@@ -20,10 +20,10 @@
   with_items:
   - 'root soft nofile 32768'
   - 'root hard nofile 65536'
-  - 'cog117cm soft nofile 32768'
-  - 'cog117cm hard nofile 65536'
-  - 'cog117as soft nofile 32768'
-  - 'cog117as hard nofile 65536'
+  #- 'cog117cm soft nofile 32768'
+  #- 'cog117cm hard nofile 65536'
+  #- 'cog117as soft nofile 32768'
+  #- 'cog117as hard nofile 65536'
 
 - name: reload settings from all system configuration files
   shell: sysctl --system
