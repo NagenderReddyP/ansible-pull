@@ -2,24 +2,20 @@
   connection: local
   become: true
 
-  pre_tasks:
-    - name: Update repositories
-      yum: 
-        update_cache: yes
-      changed_when: false
-
   tasks:
     - include: tasks/ec2_setup/create_swap_memory.yml
       vars:
         swap_size: 24
     - include: tasks/ansible_setup/create_ansible_user.yml
+    #Add /usr/local/lib to path for sudo
     - include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
+    # Install base packages
     - include: tasks/packages/install_prerequired_package.yml
     - include: tasks/users/create_user.yml
       vars:
-        username: cog117as
+        username: "cog117as"
     - include: tasks/ec2_setup/set_ulimits.yml
       vars:
         - user: "root"
-        - nofile_limit_for: "cog117cm"
+        - nofile_limit_for: "cog117as"
     - include: tasks/installation/install_binaries_AS.yml
