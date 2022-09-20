@@ -6,7 +6,7 @@
           #regexp: "^(.*)secure_path(.*)$"
           #line: '\1:/usr/local/bin\2'
 - name: Test for line
-  shell: grep  "secure_path" /etc/sudoers.bkp | grep -c "/usr/local/bin" || true
+  shell: grep  "secure_path" /etc/sudoers | grep -c "/usr/local/bin" || true
   register: path_exists 
 - name: Add /usr/local/bin/ path to sudoers
   lineinfile:
