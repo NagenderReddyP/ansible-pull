@@ -1,11 +1,12 @@
-tasks:
-- name: Create a directory for application 
-  file:
-    path: "/opt/appl"
-    state: "directory"
-    owner: "root"
-    group: "root"
-    mode: "0755"
+- hosts: all
+  tasks:
+  - name: Create a directory for application 
+    file:
+      path: "/opt/appl"
+      state: "directory"
+      owner: "root"
+      group: "root"
+      mode: "0755"
 
 - name: Create a directory for application
   ansible.builtin.file:
