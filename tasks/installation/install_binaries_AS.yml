@@ -78,6 +78,7 @@
   file: 
     path: "{{ item }}"
     owner: "cog117as"
+    group: "cog117as"
   with_items:
     - "/opt/appl/cog117as/drivers/ojdbc8.jar"
     - "/opt/appl/cog117as/configuration/cogstartup.xml"
