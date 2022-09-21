@@ -57,7 +57,7 @@
 
 - name: Create a directory for drivers
   ansible.builtin.file:
-    path: "/opt/appl/cog117as/drivers"
+    path: "/opt/appl/{{ inst_user }}/drivers"
     state: "directory"
     owner: "{{ super_user }}"
     group: "{{ super_user }}"
@@ -66,12 +66,12 @@
 - name: Copy drivers files from s3
   shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/{{ item }} ."
   args:
-    chdir: "/opt/appl/cog117as/drivers"
+    chdir: "/opt/appl/{{ inst_user }}/drivers"
   with_items:
     - "ojdbc8.jar"
 
 - name: Copy the Config file from S3 bucket to /appl/co117as/configuration/
-  shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml /opt/appl/cog117as/configuration/cogstartup.xml"
+  shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml /opt/appl/{{ inst_user }}/configuration/cogstartup.xml"
 
 
 - name: Set up owner and permissions for copied files      
@@ -80,13 +80,13 @@
     owner: "{{ inst_user }}"
     group: "{{ inst_user }}"
   with_items:
-    - "/opt/appl/cog117as/drivers/ojdbc8.jar"
-    - "/opt/appl/cog117as/configuration/cogstartup.xml"
+    - "/opt/appl/{{ inst_user }}/drivers/ojdbc8.jar"
+    - "/opt/appl/{{ inst_user }}/configuration/cogstartup.xml"
 
-- name: Take a backup of cogstartup.xml in the path /opt/appl/cog117as/configuration
+- name: Take a backup of cogstartup.xml in the path /opt/appl/{{ inst_user }}/configuration
   copy:
-    src: "/opt/appl/cog117as/configuration/cogstartup.xml"
-    dest: "/opt/appl/cog117as/configuration/cogstartup.xml.bkp"
+    src: "/opt/appl/{{ inst_user }}/configuration/cogstartup.xml"
+    dest: "/opt/appl/{{ inst_user }}/configuration/cogstartup.xml.bkp"
     owner: "{{ inst_user }}"
     group: "{{ inst_user }}"  
     mode: 0644
