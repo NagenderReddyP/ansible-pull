@@ -1,5 +1,5 @@
 - name: Variables
-  ansible.builtin.vars:
+  vars:
     var1: "variable 1"
 
 - name: Create a directory for application "{{ var1 }}"
