@@ -68,7 +68,7 @@
   args:
     chdir: "/opt/appl/cog117as/drivers"
   file: 
-    dest: "{{ item }}"
+    path: "{{ item }}"
     owner: "cog117as"
   with_items:
     - "ojdbc8.jar"
