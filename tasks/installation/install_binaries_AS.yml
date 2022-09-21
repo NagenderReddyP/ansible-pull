@@ -1,4 +1,4 @@
-- name Variables
+- name: Variables
   ansible.builtin.vars:
     var1: "variable 1"
 
