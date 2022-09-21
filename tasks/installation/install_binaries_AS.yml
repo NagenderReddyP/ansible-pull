@@ -65,15 +65,14 @@
 
 - name: Copy drivers files from s3
   shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/{{ item }} ."
-  with_items:
-    - "ojdbc8.jar"
   args:
     chdir: "/opt/appl/cog117as/drivers"
-  become_user: "cog117as"
+  file: "dest={{ item }}  owner=cog117as"
+  with_items:
+    - "ojdbc8.jar"
 
 - name: Copy the Config file from S3 bucket to /appl/co117as/configuration/
   shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml /opt/appl/cog117as/configuration/cogstartup.xml"
-  become_user: "cog117as"
 
 - name: Take a backup of cogstartup.xml in the path /opt/appl/cog117as/configuration
   copy:
