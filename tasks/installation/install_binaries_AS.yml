@@ -2,8 +2,8 @@
   file:
     path: "/opt/appl"
     state: "directory"
-    owner: "root"
-    group: "root"
+    owner: "{{ super_user }}"
+    group: "{{ super_user }}"
     mode: "0755"
 
 - name: Create a directory for application
@@ -18,8 +18,8 @@
   ansible.builtin.file:
     path: "/opt/appl/sources"
     state: "directory"
-    owner: "root"
-    group: "root"
+    owner: "{{ super_user }}"
+    group: "{{ super_user }}"
     mode: "0755"
 
 - name: Copy analytic installer from s3
@@ -29,12 +29,12 @@
     - "casrv-11.1.7-2205311318-linuxi38664h.zip"
   args: 
     chdir: "/opt/appl/sources"
-  become_user: "root"
+  become_user: "{{ super_user }}"
 
 - file:
     path: "/opt/appl/sources/{{ item }}"
-    owner: "root" 
-    group: "root"
+    owner: "{{ super_user }}" 
+    group: "{{ super_user }}"
     mode: "0777"
   with_items:
     - "analytics-installer-2.2.16-linuxx86.bin"
@@ -46,21 +46,21 @@
     - "ASInstall.properties"
   args:
     chdir: "/opt/appl/sources"
-  become_user: "root"
+  become_user: "{{ super_user }}"
 
 
   #- name: Run Analytics installer for application server
   #shell: "./analytics-installer-2.2.16-linuxx86.bin -f /opt/appl/sources/ASInstall.properties -i silent"
   #args:
   #  chdir: "/opt/appl/sources/"
-  #become_user: "cog117as"
+  #become_user: "{{ inst_user }}"
 
 - name: Create a directory for drivers
   ansible.builtin.file:
     path: "/opt/appl/cog117as/drivers"
     state: "directory"
-    owner: "root"
-    group: "root"
+    owner: "{{ super_user }}"
+    group: "{{ super_user }}"
     mode: "0755"
 
 - name: Copy drivers files from s3
@@ -77,8 +77,8 @@
 - name: Set up owner and permissions for copied files      
   file: 
     path: "{{ item }}"
-    owner: "cog117as"
-    group: "cog117as"
+    owner: "{{ inst_user }}"
+    group: "{{ inst_user }}"
   with_items:
     - "/opt/appl/cog117as/drivers/ojdbc8.jar"
     - "/opt/appl/cog117as/configuration/cogstartup.xml"
@@ -87,6 +87,6 @@
   copy:
     src: "/opt/appl/cog117as/configuration/cogstartup.xml"
     dest: "/opt/appl/cog117as/configuration/cogstartup.xml.bkp"
-    owner: "cog117as" 
-    group: "cog117as"
+    owner: "{{ inst_user }}"
+    group: "{{ inst_user }}"  
     mode: 0644
