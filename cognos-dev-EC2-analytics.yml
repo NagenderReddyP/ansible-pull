@@ -22,3 +22,6 @@
         - user: "root"
         - nofile_limit_for: "cog117as"
     - include: tasks/installation/install_binaries_AS.yml
+      vars:
+        - inst_user: "cog117as"
+        - super_user: "root"

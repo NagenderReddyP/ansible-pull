@@ -1,20 +1,17 @@
----
-- hosts: all
-  tasks:
-  - name: Create a directory for application 
-    file:
-      path: "/opt/appl"
-      state: "directory"
-      owner: "root"
-      group: "root"
-      mode: "0755"
+- name: Create a directory for application for "{{ inst_user }}"
+  file:
+    path: "/opt/appl"
+    state: "directory"
+    owner: "root"
+    group: "root"
+    mode: "0755"
 
 - name: Create a directory for application
   ansible.builtin.file:
-    path: "/opt/appl/cog117as"
+    path: "/opt/appl/{{ inst_user }}"
     state: "directory"
-    owner: "cog117as"
-    group: "cog117as"
+    owner: "{{ inst_user }}"
+    group: "{{ inst_user }}"
     mode: "0755"
 
 - name: Create a directory for application
