@@ -10,8 +10,6 @@
       vars:
         swap_size: 24
     - include: tasks/ansible_setup/create_ansible_user.yml
-    #Add /usr/local/lib to path for sudo
-    - include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
     # Install base packages
     - include: tasks/packages/install_prerequired_package.yml
     - include: tasks/users/create_user.yml
@@ -25,3 +23,5 @@
       vars:
         - inst_user: "cog117as"
         - super_user: "root"
+        - app_folder: "/opt/appl"
+        - source_folder: "{{ app_folder }}/sources"

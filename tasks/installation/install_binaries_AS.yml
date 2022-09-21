@@ -1,11 +1,6 @@
-- name: Variable definition
-  vars:
-    - var1: "Thanks Rakesh"
-
-
-- name: Create a directory for application for "{{ inst_user }} {{ var1 }}" 
+- name: Create a directory for application for "{{ inst_user }}" 
   file:
-    path: "/opt/appl"
+    path: "{{ app_folder }}"
     state: "directory"
     owner: "{{ super_user }}"
     group: "{{ super_user }}"
@@ -13,7 +8,7 @@
 
 - name: Create a directory for application
   ansible.builtin.file:
-    path: "/opt/appl/{{ inst_user }}"
+    path: "{{ app_folder }}/{{ inst_user }}"
     state: "directory"
     owner: "{{ inst_user }}"
     group: "{{ inst_user }}"
@@ -27,7 +22,7 @@
     group: "{{ super_user }}"
     mode: "0755"
 
-- name: Copy analytic installer from s3
+- name: Copy analytic installer from s3 from {{ source_folder }}
   shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/{{ item }} ."
   with_items:
     - "analytics-installer-2.2.16-linuxx86.bin"
