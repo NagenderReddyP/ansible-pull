@@ -1,9 +1,9 @@
 - name Variables
-  ansible.builtin.include_vars:
+  ansible.builtin.vars:
     var1: "variable 1"
 
 - name: Create a directory for application "{{ var1 }}"
-  File:
+  file:
     path: "/opt/appl"
     state: "directory"
     owner: "root"
