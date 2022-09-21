@@ -2,7 +2,7 @@
   connection: local
   become: true
   vars:
-    - : "Oui"
+    - test_var: "Oui"
 
   tasks:
     # Add /usr/local/lib to path for sudo

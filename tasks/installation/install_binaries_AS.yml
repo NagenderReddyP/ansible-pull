@@ -1,4 +1,4 @@
-- name: Create a directory for application for "{{ inst_user }}"  {{ test_var }}
+- name: Create a directory for application for "{{ inst_user }} {{ test_var }}
   file:
     path: "{{ app_folder }}"
     state: "directory"
