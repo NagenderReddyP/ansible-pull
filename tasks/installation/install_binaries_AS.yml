@@ -67,7 +67,9 @@
   shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/{{ item }} ."
   args:
     chdir: "/opt/appl/cog117as/drivers"
-  file: dest={{ item }} owner=cog117as
+  file: 
+    dest: "{{ item }}"
+    owner: "cog117as"
   with_items:
     - "ojdbc8.jar"
 
