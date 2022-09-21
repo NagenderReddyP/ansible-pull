@@ -30,3 +30,5 @@
         - sources_folder: "{{ app_folder }}/sources"
         - drivers_folder: "{{ app_folder }}/{{ inst_user }}/drivers"
         - configuration_folder: "{{ app_folder }}/{{ inst_user }}/configuration"
+        - s3_bucket_with_sources: "s3://cognos-dev-s3-management/Cognos-src"
+        - s3_bucket_configuration_files: "{{ s3_bucket_with_sources }}/ConfigFiles"
