@@ -1,5 +1,4 @@
-- vars:
-    var1: "variable 1"
+- var1: "variable 1"
 
 - name: Create a directory for application "{{ var1 }}"
   File:
