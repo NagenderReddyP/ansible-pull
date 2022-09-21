@@ -1,4 +1,9 @@
-- name: Create a directory for application for "{{ inst_user }}"
+- name: Variable definition
+  vars:
+    - var1: "Thanks Rakesh"
+
+
+- name: Create a directory for application for "{{ inst_user }} {{ var1 }}" 
   file:
     path: "/opt/appl"
     state: "directory"
