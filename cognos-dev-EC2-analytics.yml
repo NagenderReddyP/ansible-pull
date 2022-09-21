@@ -3,7 +3,7 @@
   become: true
 
   tasks:
-    # ²Add /usr/local/lib to path for sudo
+    # Add /usr/local/lib to path for sudo
     #- include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
     # Add swap memory and activate it
     - include: tasks/ec2_setup/create_swap_memory.yml
