@@ -75,7 +75,7 @@
 
 
 - name: Set up owner and permissions for copied files      
-- file: 
+  file: 
     path: "{{ item }}"
     owner: "cog117as"
   with_items:
