@@ -1,5 +1,8 @@
-- name: Create a directory for application
-  ansible.builtin.file:
+- vars:
+    var1: "variable 1"
+
+- name: Create a directory for application "{{ var1 }}"
+  File:
     path: "/opt/appl"
     state: "directory"
     owner: "root"
