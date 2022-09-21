@@ -49,11 +49,11 @@
   become_user: "root"
 
 
-- name: Run Analytics installer for application server
-  shell: "./analytics-installer-2.2.16-linuxx86.bin -f /opt/appl/sources/ASInstall.properties -i silent"
-  args:
-    chdir: "/opt/appl/sources/"
-  become_user: "cog117as"
+  #- name: Run Analytics installer for application server
+  #shell: "./analytics-installer-2.2.16-linuxx86.bin -f /opt/appl/sources/ASInstall.properties -i silent"
+  #args:
+  #  chdir: "/opt/appl/sources/"
+  #become_user: "cog117as"
 
 - name: Create a directory for drivers
   ansible.builtin.file:
@@ -69,9 +69,11 @@
     - "ojdbc8.jar"
   args:
     chdir: "/opt/appl/cog117as/drivers"
+  become_user: "cog117as"
 
 - name: Copy the Config file from S3 bucket to /appl/co117as/configuration/
   shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml /opt/appl/cog117as/configuration/cogstartup.xml"
+  become_user: "cog117as"
 
 - name: Take a backup of cogstartup.xml in the path /opt/appl/cog117as/configuration
   copy:
