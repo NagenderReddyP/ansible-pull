@@ -1,4 +1,6 @@
-- var1: "variable 1"
+- name Variables
+  ansible.builtin.include_vars:
+    var1: "variable 1"
 
 - name: Create a directory for application "{{ var1 }}"
   File:
