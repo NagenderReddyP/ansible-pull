@@ -23,5 +23,8 @@
       vars:
         - inst_user: "cog117as"
         - super_user: "root"
-        - app_folder: "/opt/appl"
-        - source_folder: "{{ app_folder }}/sources"
+        - root_folder: "/opt"
+        - app_folder: "{{ root_folder }}/appl"
+        - sources_folder: "{{ app_folder }}/sources"
+        - drivers_folder: "{{ app_folder }}/{{ inst_user }}/drivers"
+        - configuration_folder: "{{ app_folder }}/{{ inst_user }}/configuration"

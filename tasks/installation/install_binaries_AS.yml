@@ -6,7 +6,7 @@
     group: "{{ super_user }}"
     mode: "0755"
 
-- name: Create a directory for application
+- name: Create a directory for the user within the application folder
   ansible.builtin.file:
     path: "{{ app_folder }}/{{ inst_user }}"
     state: "directory"
@@ -16,23 +16,23 @@
 
 - name: Create a directory for application
   ansible.builtin.file:
-    path: "/opt/appl/sources"
+    path: "{{ sources_folder }}"
     state: "directory"
     owner: "{{ super_user }}"
     group: "{{ super_user }}"
     mode: "0755"
 
-- name: Copy analytic installer from s3 from {{ source_folder }}
+- name: Copy analytic installer from s3 from {{ sources_folder }}
   shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/{{ item }} ."
   with_items:
     - "analytics-installer-2.2.16-linuxx86.bin"
     - "casrv-11.1.7-2205311318-linuxi38664h.zip"
   args: 
-    chdir: "/opt/appl/sources"
+    chdir: "{{ sources_folder }}"
   become_user: "{{ super_user }}"
 
 - file:
-    path: "/opt/appl/sources/{{ item }}"
+    path: "{{ sources_folder }}/{{ item }}"
     owner: "{{ super_user }}" 
     group: "{{ super_user }}"
     mode: "0777"
@@ -45,19 +45,19 @@
   with_items:
     - "ASInstall.properties"
   args:
-    chdir: "/opt/appl/sources"
+    chdir: "{{ sources_folder }}"
   become_user: "{{ super_user }}"
 
 
   #- name: Run Analytics installer for application server
-  #shell: "./analytics-installer-2.2.16-linuxx86.bin -f /opt/appl/sources/ASInstall.properties -i silent"
+  #shell: "./analytics-installer-2.2.16-linuxx86.bin -f {{ sources_folder }}/ASInstall.properties -i silent"
   #args:
   #  chdir: "/opt/appl/sources/"
   #become_user: "{{ inst_user }}"
 
 - name: Create a directory for drivers
-  ansible.builtin.file:
-    path: "/opt/appl/{{ inst_user }}/drivers"
+  file:
+    path: "{{ drivers_folder }}"
     state: "directory"
     owner: "{{ super_user }}"
     group: "{{ super_user }}"
@@ -66,12 +66,12 @@
 - name: Copy drivers files from s3
   shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/{{ item }} ."
   args:
-    chdir: "/opt/appl/{{ inst_user }}/drivers"
+    chdir: "{{ drivers_folder }}"
   with_items:
     - "ojdbc8.jar"
 
-- name: Copy the Config file from S3 bucket to /appl/co117as/configuration/
-  shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml /opt/appl/{{ inst_user }}/configuration/cogstartup.xml"
+- name: Copy the Config file from S3 bucket to {{ configuration_folder }}
+  shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml {{ configuration_folder }}/cogstartup.xml"
 
 
 - name: Set up owner and permissions for copied files      
@@ -80,13 +80,13 @@
     owner: "{{ inst_user }}"
     group: "{{ inst_user }}"
   with_items:
-    - "/opt/appl/{{ inst_user }}/drivers/ojdbc8.jar"
-    - "/opt/appl/{{ inst_user }}/configuration/cogstartup.xml"
+    - "{{ drivers_folder }}/ojdbc8.jar"
+    - "{{ configuration_folder }}/cogstartup.xml"
 
-- name: Take a backup of cogstartup.xml in the path /opt/appl/{{ inst_user }}/configuration
+- name: Take a backup of cogstartup.xml in the path {{ configuration_folder }}
   copy:
-    src: "/opt/appl/{{ inst_user }}/configuration/cogstartup.xml"
-    dest: "/opt/appl/{{ inst_user }}/configuration/cogstartup.xml.bkp"
+    src: "{{ configuration_folder }}/cogstartup.xml"
+    dest: "{{ configuration_folder }}/cogstartup.xml.bkp"
     owner: "{{ inst_user }}"
     group: "{{ inst_user }}"  
     mode: 0644
