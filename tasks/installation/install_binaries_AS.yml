@@ -49,11 +49,11 @@
   become_user: "{{ super_user }}"
 
 
-  #- name: Run Analytics installer for application server
-  #shell: "./analytics-installer-2.2.16-linuxx86.bin -f {{ sources_folder }}/ASInstall.properties -i silent"
-  #args:
-  #  chdir: "/opt/appl/sources/"
-  #become_user: "{{ inst_user }}"
+ - name: Run Analytics installer for application server
+   shell: "./analytics-installer-2.2.16-linuxx86.bin -f {{ sources_folder }}/ASInstall.properties -i silent"
+   args:
+     chdir: "{{ sources_folder }}"
+   become_user: "{{ inst_user }}"
 
 - name: Create a directory for drivers
   file:
@@ -71,8 +71,9 @@
     - "ojdbc8.jar"
 
 - name: Copy the Config file from S3 bucket to {{ configuration_folder }}
-  shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml {{ configuration_folder }}/cogstartup.xml"
-
+  shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/ConfigFiles/AS1Config.xml {{ configuration_folder }}/{{ item }}"
+  with_items:
+    - "cogstartup.xml"
 
 - name: Set up owner and permissions for copied files      
   file: 
