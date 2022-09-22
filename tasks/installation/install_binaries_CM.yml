@@ -71,7 +71,7 @@
   with_items:
     - "ojdbc8.jar"
 
-- name: Copy the Config file from S3 bucket to {{ configuration_folder }}
+- name: Copy the Config file {{ component_type }}1Config.xml from S3 bucket to {{ configuration_folder }}
   shell: "/usr/local/bin/aws s3 cp {{ s3_bucket_configuration_files }}/{{ component_type }}Config.xml {{ configuration_folder }}/{{ item }}"
   with_items:
     - "cogstartup.xml"
