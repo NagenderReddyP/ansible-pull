@@ -2,6 +2,7 @@
   connection: local
   become: true
   vars:
+    - component_type: "CM"
     - inst_user: "cog117cm"
     - super_user: "root"
   tasks:

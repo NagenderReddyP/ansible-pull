@@ -2,9 +2,9 @@
   connection: local
   become: true
   vars:
+    - component_type: "GW"
     - inst_user: "cog117gw"
     - super_user: "root"
-    - component_type: "GW"
   tasks:
     # Add /usr/local/lib to path for sudo
     #- include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
