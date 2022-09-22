@@ -13,16 +13,25 @@
     - include: tasks/ec2_setup/create_swap_memory.yml
       vars:
         swap_size: "{{ swap_memory_size }}"
+    
+    #
     - include: tasks/ansible_setup/create_ansible_user.yml
+    
     # Install base packages
     - include: tasks/packages/install_prerequired_package.yml
+    
+    #
     - include: tasks/users/create_user.yml
       vars:
         username: "{{ inst_user }}"
+    
+    #
     - include: tasks/ec2_setup/set_ulimits.yml
       vars:
         - user: "{{ super_user}}"
         - nofile_limit_for: "{{ inst_user }}"
+    
+    #
     - include: tasks/installation/install_binaries_AS.yml
       vars:
         - root_folder: "/opt"
@@ -32,3 +41,5 @@
         - configuration_folder: "{{ app_folder }}/{{ inst_user }}/configuration"
         - s3_bucket_with_sources: "s3://cognos-dev-s3-management/Cognos-src"
         - s3_bucket_configuration_files: "{{ s3_bucket_with_sources }}/ConfigFiles"
+# Todo list:
+#   1. Disable SELinux on RHEL 8 --> /etc/selinux/config ===> SELINUX=disabled

@@ -1,20 +1,39 @@
 - hosts: localhost
   connection: local
   become: true
-
-  pre_tasks:
-    - name: Update repositories
-      yum: 
-        update_cache: yes
-      changed_when: false
-
+  vars:
+    - inst_user: "cog117cm"
+    - super_user: "root"
   tasks:
-    - include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
-    - include: tasks/ec2_setup/create_swap_memory.yml
-      vars:
-        swap_size: 24
-    - #include: tasks/packages/install_prerequired_package.yml
+    # Add /usr/local/lib to path for sudo
+    #- include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
+    
+    #
+    - include: tasks/ansible_setup/create_ansible_user.yml
+    
+    # Install base packages
+    - include: tasks/packages/install_prerequired_package.yml
+    
+    #
     - include: tasks/users/create_user.yml
       vars:
-        username: cog117cm
+        username: "{{ inst_user }}"
+    
+    #
+    - include: tasks/ec2_setup/set_ulimits.yml
+      vars:
+        - user: "{{ super_user}}"
+        - nofile_limit_for: "{{ inst_user }}"
+    
+    #
     - include: tasks/installation/install_binaries_CM.yml
+      vars:
+        - root_folder: "/opt"
+        - app_folder: "{{ root_folder }}/appl"
+        - sources_folder: "{{ app_folder }}/sources"
+        - drivers_folder: "{{ app_folder }}/{{ inst_user }}/drivers"
+        - configuration_folder: "{{ app_folder }}/{{ inst_user }}/configuration"
+        - s3_bucket_with_sources: "s3://cognos-dev-s3-management/Cognos-src"
+        - s3_bucket_configuration_files: "{{ s3_bucket_with_sources }}/ConfigFiles"
+# Todo list:
+#   1. Disable SELinux on RHEL 8 --> /etc/selinux/config ===> SELINUX=disabled
