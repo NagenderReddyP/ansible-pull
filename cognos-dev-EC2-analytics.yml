@@ -42,5 +42,3 @@
         - configuration_folder: "{{ app_folder }}/{{ inst_user }}/configuration"
         - s3_bucket_with_sources: "s3://cognos-dev-s3-management/Cognos-src"
         - s3_bucket_configuration_files: "{{ s3_bucket_with_sources }}/ConfigFiles"
-# Todo list:
-#   1. Disable SELinux on RHEL 8 --> /etc/selinux/config ===> SELINUX=disabled
