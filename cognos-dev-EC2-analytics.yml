@@ -2,8 +2,8 @@
   connection: local
   become: true
   vars:
-    - component_type: "AS"
-    - inst_user: "cog117as"
+#    - component_type: "AS"
+#    - inst_user: "cog117as"
     - super_user: "root"
     - swap_memory_size: 24
   tasks:
