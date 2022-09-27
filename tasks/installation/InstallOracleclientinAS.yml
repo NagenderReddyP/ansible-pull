@@ -1,0 +1,101 @@
+
+
+- name: Create a directory for the user {{ inst_user }} within the application folder {{ app_folder }}
+  file:
+    path: "{{ app_folder }}/{{ inst_user }}"
+    state: "directory"
+    owner: "{{ inst_user }}"
+    group: "{{ inst_user }}"
+    mode: "0755"
+
+- name: Create a directory for application
+  file:
+    path: "{{ sources_folder }}"
+    state: "directory"
+    owner: "{{ super_user }}"
+    group: "{{ super_user }}"
+    mode: "0755"
+
+- name: Copy analytic installer from s3 from {{ sources_folder }}
+  shell: "/usr/local/bin/aws s3 cp s3://creport-dev-s3-mgt/Cognos-src/11.1.7FP5/{{ item }} ."
+  with_items:
+    - "analytics-installer-2.2.16-linuxx86.bin"
+    - "casrv-11.1.7-2205311318-linuxi38664h.zip"
+  args: 
+    chdir: "{{ sources_folder }}"
+  become_user: "{{ super_user }}"
+
+- name: Set user owner and permisions for installation files
+  file:
+    path: "{{ sources_folder }}/{{ item }}"
+    owner: "{{ super_user }}" 
+    group: "{{ super_user }}"
+    mode: "0777"
+  with_items:
+    - "analytics-installer-2.2.16-linuxx86.bin"
+    - "casrv-11.1.7-2205311318-linuxi38664h.zip"
+
+- name: Copy properties files from s3
+  shell: "/usr/local/bin/aws s3 cp {{ s3_bucket_with_sources }}/Responsefiles/{{ item }} ."
+  with_items:
+    - "ASInstall.properties"
+  args:
+    chdir: "{{ sources_folder }}"
+  become_user: "{{ super_user }}"
+
+
+- name: Run Analytics installer for application server
+  shell: "./analytics-installer-2.2.16-linuxx86.bin -f {{ sources_folder }}/{{ component_type }}Install.properties -i silent"
+  args:
+    chdir: "{{ sources_folder }}"
+  become_user: "{{ inst_user }}"
+
+- name: Create a directory for drivers
+  file:
+    path: "{{ drivers_folder }}"
+    state: "directory"
+    owner: "{{ super_user }}"
+    group: "{{ super_user }}"
+    mode: "0755"
+
+- name: Copy drivers files from s3
+  shell: "/usr/local/bin/aws s3 cp {{ s3_bucket_with_sources }}/11.1.7FP5/{{ item }} ."
+  args:
+    chdir: "{{ drivers_folder }}"
+  with_items:
+    - "ojdbc8.jar"
+
+###
+# Here we need to implement the logic to identify the Analytics Server based on the IP
+# AS1Config.xml or AS2Config.xml
+###
+
+- name: Copy the Config file {{ component_type }}1Config.xml from S3 bucket to {{ configuration_folder }}
+  shell: "/usr/local/bin/aws s3 cp {{ s3_bucket_configuration_files }}/{{ component_type }}1Config.xml {{ configuration_folder }}/{{ item }}"
+  with_items:
+    - "cogstartup.xml"
+
+- name: Set up owner and permissions for ojdbc8.jar file      
+  file: 
+    path: "{{ item }}"
+    owner: "{{ inst_user }}"
+    group: "{{ inst_user }}"
+  with_items:
+    - "{{ drivers_folder }}/ojdbc8.jar"
+
+- name: Set up owner and permissions for cogstartup.xml file      
+  file: 
+    path: "{{ item }}"
+    owner: "{{ inst_user }}"
+    group: "{{ inst_user }}"
+    mode: "0655"
+  with_items:
+    - "{{ configuration_folder }}/cogstartup.xml"
+
+- name: Take a backup of cogstartup.xml in the path {{ configuration_folder }}
+  copy:
+    src: "{{ configuration_folder }}/cogstartup.xml"
+    dest: "{{ configuration_folder }}/cogstartup.xml.bkp"
+    owner: "{{ inst_user }}"
+    group: "{{ inst_user }}"  
+    mode: 0655
