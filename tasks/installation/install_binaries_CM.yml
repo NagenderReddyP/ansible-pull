@@ -23,7 +23,7 @@
     mode: "0755"
 
 - name: Copy analytic installer from s3 from {{ sources_folder }}
-  shell: "/usr/local/bin/aws s3 cp s3://cognos-dev-s3-management/Cognos-src/11.1.7FP5/{{ item }} ."
+  shell: "/usr/local/bin/aws s3 cp s3://creport-dev-s3-mgt/Cognos-src/11.1.7FP5/{{ item }} ."
   with_items:
     - "analytics-installer-2.2.16-linuxx86.bin"
     - "casrv-11.1.7-2205311318-linuxi38664h.zip"
