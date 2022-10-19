@@ -30,4 +30,4 @@
       register: selected_as
     - name: Print 
       debug: 
-        msg: "Select as: {{ selected_as }}"
+        msg: "Select as: {{ selected_as.stdout }}"
