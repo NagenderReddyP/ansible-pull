@@ -6,6 +6,7 @@
     - inst_user: "cog117as"
     - super_user: "root"
     - swap_memory_size: 24
+    - aws_region: "eu-west-1"
   tasks:
     # Add /usr/local/lib to path for sudo
     #- include: tasks/ansible_setup/add_lib_to_sudoers_path.yml

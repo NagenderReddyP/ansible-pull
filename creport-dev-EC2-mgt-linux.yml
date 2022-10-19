@@ -20,15 +20,14 @@
     #    - nofile_limit_for: "cog117cm"
 
     #    install_binaries.yml
-    - name: Create variable from command
-      shell: /usr/local/bin/aws ec2 describe-tags --region eu-west-1 --filters "Name=key,Values=AppComponent" "Name=resource-type,Values=instance" "Name=value,Values=analytics"  --query "Tags[*].ResourceId" --output json 
-      register: analytics_instances
-    - set_fact:
-         ais: "{{ analytics_instances.stdout }}"
-    - name: Pepe
+    #- name: Create variable from command
+    #  shell: /usr/local/bin/aws ec2 describe-tags --region eu-west-1 --filters "Name=key,Values=AppComponent" "Name=resource-type,Values=instance" "Name=value,Values=analytics"  --query "Tags[*].ResourceId" --output json 
+    #  register: analytics_instances
+    #- set_fact:
+    #     ais: "{{ analytics_instances.stdout }}"
+    #- name: Pepe
       #  shell: /usr/local/bin/aws --region eu-west-1 ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values={{ ais }}" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort | grep -n $(hostname -i) | cut -d":" -f1
-      shell: /usr/local/bin/aws --region eu-west-1 ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values={{ ais }}" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort | grep -n 10.56.3.237 | cut -d":" -f1
-      register: selected_as
-    - name: Print 
-      debug: 
-        msg: "Select as: {{ selected_as.stdout }}"
+      # register: selected_as
+      #- name: Print 
+      #debug: 
+      #  msg: "Select as: {{ selected_as.stdout }}"
