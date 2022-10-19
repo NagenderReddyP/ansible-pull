@@ -19,5 +19,4 @@
         - user: "root"
         - nofile_limit_for: "cog117cm"
 
-    #
     #    install_binaries.yml
