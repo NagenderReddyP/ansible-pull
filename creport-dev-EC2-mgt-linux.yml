@@ -21,6 +21,6 @@
 
     #    install_binaries.yml
     - name: Create variable from command
-      command: /usr/local/bin/aws --region eu-west-1 ec2 describe-instances --filters '"Name=instance-state-name,Values=running"' '"Name=instance-id,Values=$(aws ec2 describe-tags --region eu-west-1 --filters '"Name=key,Values=AppComponent"' '"Name=resource-type,Values=instance"' '"Name=value,Values=analytics"'  --query '"Tags[*].ResourceId"' --output json)"' --query '"Reservations[*].Instances[*].[PrivateIpAddress]"' --output text | sort | grep -n '"10.56.3.237"' | cut -d: -f1
+      command: /usr/local/bin/aws --region eu-west-1 ec2 describe-instances --filters '"Name=instance-state-name,Values=running" "Name=instance-id,Values=$(aws ec2 describe-tags --region eu-west-1 --filters "Name=key,Values=AppComponent" "Name=resource-type,Values=instance" "Name=value,Values=analytics"'  --query '"Tags[*].ResourceId"' --output json)"' --query '"Reservations[*].Instances[*].[PrivateIpAddress]"' --output text | sort | grep -n '"10.56.3.237"' | cut -d: -f1
       register: command_output
     - debug: msg="{{command_output.stdout}}"
