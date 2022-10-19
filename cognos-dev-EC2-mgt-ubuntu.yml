@@ -14,9 +14,13 @@
     #- include: tasks/ansible_setup/add_ansible_to_cron.yml
     #- include: tasks/packages/install_prerequired_package.yml
     #- include: tasks/installation/install_binaries.yml
-    - include: tasks/ec2_setup/set_ulimits.yml
-      vars:
-        - user: "root"
-        - nofile_limit_for: "cog117cm"
+    #- include: tasks/ec2_setup/set_ulimits.yml
+    #  vars:
+    #    - user: "root"
+    #    - nofile_limit_for: "cog117cm"
 
     #    install_binaries.yml
+    - name: Create variable from command
+      command: "echo Hello"
+      register: command_output
+    - debug: msg="{{command_output.stdout}}"
