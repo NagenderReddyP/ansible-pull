@@ -23,6 +23,8 @@
     - name: Create variable from command
       shell: /usr/local/bin/aws ec2 describe-tags --region eu-west-1 --filters "Name=key,Values=AppComponent" "Name=resource-type,Values=instance" "Name=value,Values=analytics"  --query "Tags[*].ResourceId" --output json 
       register: analytics_instances
-      shell: /usr/local/bin/aws --region eu-west-1 ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values={{ analytics_instances }}" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort | grep -n $(hostname -i) | cut -d’:’ -f1
+      set_fact:
+         ais: "{{ analytics_instances.stdout }}"
+      shell: /usr/local/bin/aws --region eu-west-1 ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values={{ ais }}" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort | grep -n $(hostname -i) | cut -d’:’ -f1
       register: analytic_server
     - debug: msg="{{analytic_server.stdout}}"
