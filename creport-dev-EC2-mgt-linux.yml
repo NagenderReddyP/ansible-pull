@@ -26,4 +26,4 @@
     - set_fact:
          ais: "{{ analytics_instances.stdout }}"
     - name: Pepe
-      shell: /usr/local/bin/aws --region eu-west-1 ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values={{ ais }}" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort | grep -n $(hostname -i) | cut -d’:’ -f1
+      shell: /usr/local/bin/aws --region eu-west-1 ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values={{ ais }}" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort | grep -n $(hostname -i) | cut -d: -f1
