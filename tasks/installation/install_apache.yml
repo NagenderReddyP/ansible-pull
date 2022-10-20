@@ -1,0 +1,25 @@
+#############################################################################################################################
+#
+#
+#############################################################################################################################
+
+# sudo dnf install httpd
+- name: Install the latest version of Apache
+  ansible.builtin.dnf:
+    name: httpd
+    state: latest
+
+Copy the cognos.conf file to the path /etc/httpd/conf.d
+aws s3 cp s3://creport-dev-s3-mgt/Cognos-src/ConfigFiles/cognos.conf
+Note : The IP of gateway is currently hardcoded, we need to make it dynamic
+
+Enable Apache:
+sudo systemctl enable httpd
+
+serviceTo Stop Apache:
+
+sudo systemctl stop httpd.
+
+serviceTo Start Apache:
+
+sudo systemctl start httpd.service
