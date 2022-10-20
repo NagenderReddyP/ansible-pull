@@ -1,3 +1,8 @@
+#############################################################################################################################
+#
+#
+#############################################################################################################################
+
 - name: Create a directory for application for {{ inst_user }}
   file:
     path: "{{ app_folder }}"
@@ -83,7 +88,7 @@
   register: selected_as
 - name: Print
   debug:
-    msg: "This Application server has been identified as: AS{{ selected_as.stdout }}"
+    msg: "This Analytics server has been identified as: AS{{ selected_as.stdout }}"
 - set_fact:
      asNumber: "{{ selected_as.stdout }}"
 ##################################################################################################      
