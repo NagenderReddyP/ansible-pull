@@ -13,7 +13,8 @@ Master configuration file for all IBM Cognos components.
  -->
 <crn:parameters xmlns:crn="http://developer.cognos.com/schemas/crconfig/1/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfg="http://developer.cognos.com/schemas/configparams/XMLSchema/1/" version="175.0" xsi:schemaLocation="http://developer.cognos.com/schemas/crconfig/1/ cogstartup.xsd">
   <crn:parameter name="licenseType">
-    <crn:value xsi:type="xsd:string">{{ environment }}</crn:value>
-    <crn:value xsi:type="xsd:string">{{ a }}</crn:value>
+    <crn:value xsi:type="xsd:string">{{ _env }}</crn:value>
+    <crn:value xsi:type="xsd:string">{{ env }}</crn:value>
+    <crn:value xsi:type="xsd:string">{{ a }}</crn:value>	
   </crn:parameter>
 </crn:parameters>

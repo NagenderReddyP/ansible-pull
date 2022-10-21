@@ -4,7 +4,8 @@
   connection: local
   become: true
   vars:
-    - environment: "production"
+    - _env: "production"
+    - env: "dev"
     - a: "test"
 
   tasks:
