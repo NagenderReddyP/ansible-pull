@@ -5,6 +5,7 @@
   become: true
   vars:
     - environment: "production"
+    - a: "test"
 
   tasks:
     - name: Play for testing scripts before move them to final files
