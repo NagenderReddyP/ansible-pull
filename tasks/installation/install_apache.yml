@@ -8,18 +8,27 @@
   ansible.builtin.dnf:
     name: httpd
     state: latest
+- name: Copy configuration file
+  shell: /usr/local/bin/aws s3 cp s3://creport-dev-s3-mgt/Cognos-src/ConfigFiles/cognos.conf
 
-Copy the cognos.conf file to the path /etc/httpd/conf.d
-aws s3 cp s3://creport-dev-s3-mgt/Cognos-src/ConfigFiles/cognos.conf
-Note : The IP of gateway is currently hardcoded, we need to make it dynamic
+- name: Enable Apache service
+  shell: systemctl enable httpd
 
-Enable Apache:
-sudo systemctl enable httpd
+- name: Start Apache service
+  shell: systemctl start httpd.service
 
-serviceTo Stop Apache:
 
-sudo systemctl stop httpd.
 
-serviceTo Start Apache:
 
-sudo systemctl start httpd.service
+# Copy the cognos.conf file to the path /etc/httpd/conf.d
+# aws s3 cp s3://creport-dev-s3-mgt/Cognos-src/ConfigFiles/cognos.conf
+# Note : The IP of gateway is currently hardcoded, we need to make it dynamic
+
+# Enable Apache:
+# sudo systemctl enable httpd.service
+
+# To Stop Apache:
+# sudo systemctl stop httpd.service
+
+# To Start Apache:
+# sudo systemctl start httpd.service

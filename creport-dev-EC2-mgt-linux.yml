@@ -1,37 +1,17 @@
-#############################################################################################################################
-#
-#
-#############################################################################################################################
-- hosts: localhost
+---
+- name: Play testing ansible scripts
+  hosts: localhost
   connection: local
   become: true
 
-  #pre_tasks:
-  #  - name: Update repositories
-  #    apt: 
-  #      update_cache: yes
-  #    changed_when: false
-
   tasks:
-    #- include: tasks/ansible_setup/create_ansible_user.yml 
-    #- include: tasks/ansible_setup/install_cron_package.yml
-    #- include: tasks/ansible_setup/add_ansible_to_cron.yml
-    #- include: tasks/packages/install_prerequired_package.yml
-    #- include: tasks/installation/install_binaries.yml
-    #- include: tasks/ec2_setup/set_ulimits.yml
-    #  vars:
-    #    - user: "root"
-    #    - nofile_limit_for: "cog117cm"
+    - name: Play for testing scripts before move them to final files
+      ansible.builtin.command: echo "Hello"
+      register: my_output
+      changed_when: my_output.rc != 0
 
-    #    install_binaries.yml
-    #- name: Create variable from command
-    #  shell: /usr/local/bin/aws ec2 describe-tags --region eu-west-1 --filters "Name=key,Values=AppComponent" "Name=resource-type,Values=instance" "Name=value,Values=analytics"  --query "Tags[*].ResourceId" --output json 
-    #  register: analytics_instances
-    #- set_fact:
-    #     ais: "{{ analytics_instances.stdout }}"
-    #- name: Pepe
-      #  shell: /usr/local/bin/aws --region eu-west-1 ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values={{ ais }}" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort | grep -n $(hostname -i) | cut -d":" -f1
-      # register: selected_as
-      #- name: Print 
-      #debug: 
-      #  msg: "Select as: {{ selected_as.stdout }}"
+    - name: Generate ntp configuration file.
+      ansible.builtin.template:
+        src: "./templates/config/test.j2"
+        dest: "/tmp/AS1.xml"
+        mode: 0644

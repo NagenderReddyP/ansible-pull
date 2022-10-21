@@ -9,6 +9,7 @@
     - component_type: "GW"
     - inst_user: "cog117gw"
     - super_user: "root"
+    - s3_bucket: "s3://creport-dev-s3-mgt"
   tasks:
     # Add /usr/local/lib to path for sudo
     #- include: tasks/ansible_setup/add_lib_to_sudoers_path.yml
@@ -38,6 +39,5 @@
         - sources_folder: "{{ app_folder }}/sources"
         - drivers_folder: "{{ app_folder }}/{{ inst_user }}/drivers"
         - configuration_folder: "{{ app_folder }}/{{ inst_user }}/configuration"
-        - s3_bucket: "s3://creport-dev-s3-mgt"
         - s3_bucket_with_sources: "{{ s3_bucket }}/Cognos-src"
         - s3_bucket_configuration_files: "{{ s3_bucket_with_sources }}/ConfigFiles"

@@ -1,3 +1,4 @@
-- name: Install cron
-  apt:
-    name: cron 
+- name: Install Pre-required packages
+  ansible.builtin.package:
+    name: cron
+    state: latest

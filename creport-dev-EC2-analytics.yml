@@ -2,7 +2,7 @@
 #
 #
 #############################################################################################################################
-- hosts: localhost
+- hosts: pull_mode_hosts
   connection: local
   become: true
   vars:
@@ -11,6 +11,7 @@
     - super_user: "root"
     - swap_memory_size: 24
     - aws_region: "eu-west-1"
+    - s3_bucket: "s3://creport-dev-s3-mgt"    
 
   tasks:
     # Add /usr/local/lib to path for sudo
@@ -46,6 +47,5 @@
         - sources_folder: "{{ app_folder }}/sources"
         - drivers_folder: "{{ app_folder }}/{{ inst_user }}/drivers"
         - configuration_folder: "{{ app_folder }}/{{ inst_user }}/configuration"
-        - s3_bucket: "s3://creport-dev-s3-mgt"
         - s3_bucket_with_sources: "{{ s3_bucket }}/Cognos-src"
         - s3_bucket_configuration_files: "{{ s3_bucket_with_sources }}/ConfigFiles"
