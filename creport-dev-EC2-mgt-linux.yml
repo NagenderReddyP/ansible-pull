@@ -3,6 +3,8 @@
   hosts: localhost
   connection: local
   become: true
+  vars: 
+    - environment: "production"
 
   tasks:
     - name: Play for testing scripts before move them to final files
