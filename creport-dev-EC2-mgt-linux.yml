@@ -1,5 +1,4 @@
----
-- name: Play testing ansible scripts
+- name: Play for testing scripts before to move them
   hosts: localhost
   connection: local
   become: true
@@ -14,7 +13,7 @@
       register: my_output
       changed_when: my_output.rc != 0
 
-    - name: Generate ntp configuration file.
+    - name: Generate Analitycs configuration file.
       ansible.builtin.template:
         src: "./templates/config/test.j2"
         dest: "/tmp/AS1.xml"
