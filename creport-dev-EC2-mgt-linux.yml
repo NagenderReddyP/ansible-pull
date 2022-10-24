@@ -1,5 +1,5 @@
 - name: Play for testing scripts before to move them
-  hosts: localhost
+  hosts: all
   connection: local
   become: true
   vars:
