@@ -1,4 +1,4 @@
-- name: Play for testing scripts before to move them
+- name: Playbook to apply templates
   hosts: all
   connection: local
   become: true
@@ -7,14 +7,15 @@
     - env: "dev"
     - a: "test"
 
+
   tasks:
     - name: Play for testing scripts before move them to final files
       ansible.builtin.command: echo "Hello"
       register: my_output
       changed_when: my_output.rc != 0
 
-    - name: Generate Analitycs configuration file.
-      ansible.builtin.template:
-        src: "./templates/config/test.j2"
-        dest: "/tmp/AS1.xml"
-        mode: 0644
+    - name: Call template include
+      ansible.builtin.include_tasks: tasks/installation/apply_template.yml
+      vars:
+        - var_1: 'var1'
+        - var_2: 'var2'
