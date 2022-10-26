@@ -190,7 +190,7 @@ Master configuration file for all IBM Cognos components.
        specify the network host name or an IP address. If the host name portion of the URI
        is set to 'localhost', ensure that 'localhost' is defined on the computer.  -->
   <crn:parameter name="externalDispatcher">
-    <crn:value xsi:type="cfg:localURI">http://ip-10-56-3-137.eu-west-1.compute.internal:9300/p2pd/servlet/dispatch</crn:value>
+    <crn:value xsi:type="cfg:localURI">{{ EXTERNAL_DISPATCHER_URI }}</crn:value>
   </crn:parameter>
   <!-- internalDispatcher: Specifies the URI to the dispatcher that processes requests from
        services on the same computer.  -->
@@ -202,7 +202,7 @@ Master configuration file for all IBM Cognos components.
        local computer. If the host name portion of the URI is set to 'localhost', ensure
        that 'localhost' is defined on the computer.  -->
   <crn:parameter name="internalDispatcher">
-    <crn:value xsi:type="cfg:localURI">http://ip-10-56-3-137.eu-west-1.compute.internal:9300/p2pd/servlet/dispatch</crn:value>
+    <crn:value xsi:type="cfg:localURI">{{ INTERNAL_DISPATCHER_URI }}</crn:value>
   </crn:parameter>
   <!-- disp_sharedsecret: Specifies the password that enables secure communication between
        Dispatchers.  -->
@@ -292,7 +292,7 @@ Master configuration file for all IBM Cognos components.
        is defined on the computer.  -->
   <crn:parameter name="contentManagers" opaque="true">
     <crn:value xsi:type="cfg:array">
-      <crn:item xsi:type="xsd:anyURI">http://internal-creport-dev-lb-content-mgr-1585325614.eu-west-1.elb.amazonaws.com:9300/p2pd/servlet</crn:item>
+      <crn:item xsi:type="xsd:anyURI">{{ DISPATCHER_URI_4_EXTERNAL_APPS }}</crn:item>
     </crn:value>
   </crn:parameter>
   <crn:parameter name="retrieveConfigUser">
@@ -356,7 +356,7 @@ Master configuration file for all IBM Cognos components.
            must be unique for each group. Different configuration groups must have a different
            name. A descriptive name like "inventory_production" is recommended  -->
       <crn:parameter name="configGroupName">
-        <crn:value xsi:type="xsd:string">GRP_CREPORTDEV</crn:value>
+        <crn:value xsi:type="xsd:string">{{ GROUP_NAME }}</crn:value>
       </crn:parameter>
       <!-- configGroupPassword: Specifies the password that enables secure communication between
            members of configuration group.  -->
@@ -374,7 +374,7 @@ Master configuration file for all IBM Cognos components.
       <!-- configGroupContactHost: Specifies the host name of the primary configuration group
            member. It should be the same host as primary Content Manager install.  -->
       <crn:parameter name="configGroupContactHost">
-        <crn:value xsi:type="cfg:hostOnly">ip-10-56-3-133.eu-west-1.compute.internal</crn:value>
+        <crn:value xsi:type="cfg:hostOnly">{{ GROUP_CONTACT_HOST }}</crn:value>
       </crn:parameter>
       <!-- configGroupMemberSyncPort: Specifies the local port number used for network communication
            that transfers and synchronizes configuration information from one server to another.  -->
@@ -398,7 +398,7 @@ Master configuration file for all IBM Cognos components.
            to specify the network host name or an IP address to ensure the product uses the
            right adapter.  -->
       <crn:parameter name="configGroupMemberHost">
-        <crn:value xsi:type="cfg:localHostOnly">ip-10-56-3-137.eu-west-1.compute.internal</crn:value>
+        <crn:value xsi:type="cfg:localHostOnly">{{ MEMBER_COORDINATION_HOST }}</crn:value>
       </crn:parameter>
     </crn:value>
   </crn:parameter>
@@ -1891,7 +1891,7 @@ Master configuration file for all IBM Cognos components.
           <!-- Specifies the DNS names that are added to the Subject Alternative Name extensions
                in the server certificate.  -->
           <crn:parameter name="sanDNSName">
-            <crn:value xsi:type="xsd:string">ip-10-56-3-137.eu-west-1.compute.internal</crn:value>
+            <crn:value xsi:type="xsd:string">{{ DNS_NAME }}</crn:value>
           </crn:parameter>
           <!-- sanIPAddress: A space-separated list of IP addresses that will be added to the Subject
                Alternative Name extension in the server certificate. This property is only required
@@ -1900,7 +1900,7 @@ Master configuration file for all IBM Cognos components.
           <!-- Specifies the IP addresses that are added to the Subject Alternative Name extensions
                in the server certificate.  -->
           <crn:parameter name="sanIPAddress">
-            <crn:value xsi:type="xsd:string">10.56.3.137</crn:value>
+            <crn:value xsi:type="xsd:string">{{ IP_ADDRESS }}</crn:value>
           </crn:parameter>
           <!-- sanEmail: A space-separated list of e-mail addresses that are added to the Subject
                Alternative Name extension in the server certificate. If no e-mail addresses are
@@ -2250,7 +2250,7 @@ Master configuration file for all IBM Cognos components.
           <!-- server: Specifies the name or TCP/IP address of the database computer.  -->
           <!-- The default value "localhost" indicates that the database is on this computer.  -->
           <crn:parameter name="server">
-            <crn:value xsi:type="cfg:hostPort">creportdev.cit9nbofg1l2.eu-west-1.rds.amazonaws.com:23000</crn:value>
+            <crn:value xsi:type="cfg:hostPort">{{ DATABASE_URI }}</crn:value>
           </crn:parameter>
           <!-- user: Specifies the user ID and password that the product uses to connect to the
                content store.  -->
@@ -2260,8 +2260,8 @@ Master configuration file for all IBM Cognos components.
           <crn:parameter name="user">
             <crn:value xsi:type="cfg:credential">
               <credential>
-                <username>creport</username>
-                <password>GsoHnXHnvbSFcKKrcoit</password>
+                <username>{{ DB_USER }}</username>
+                <password>{{ DB_PWD }}</password>
               </credential>
             </crn:value>
           </crn:parameter>
@@ -2269,7 +2269,7 @@ Master configuration file for all IBM Cognos components.
           <!-- Use this property so that you can connect to the Oracle instance that corresponds
                to the database.  -->
           <crn:parameter name="servicename">
-            <crn:value xsi:type="xsd:string">creport</crn:value>
+            <crn:value xsi:type="xsd:string">{{ SERVICE_NAME }}</crn:value>
           </crn:parameter>
           <!-- advancedProperties: Defines the set of extra connection parameters.  -->
           <!-- The user needs to provide the name and the value for each advanced property.  -->

@@ -29,6 +29,6 @@
         - IP_ADDRESS: '10.56.3.137' #- Line 1903
         - DATABASE_PORT: 23000 #- Line 2253
         - DATABASE_URI: creportdev.cit9nbofg1l2.eu-west-1.rds.amazonaws.com:{{ DATABASE_PORT }}
-        - DB_USER: 'db_user' #- Line 2263
-        - DB_PWD: 'db_passwd' #- Line 2264
+        - DB_USER: 'creport' #- Line 2263
+        - DB_PWD: 'GsoHnXHnvbSFcKKrcoit' #- Line 2264
         - SERVICE_NAME: 'creport' #- Line 2272
