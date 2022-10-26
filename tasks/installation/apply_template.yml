@@ -2,10 +2,8 @@
 #
 #
 #############################################################################################################################
-
-
 - name: Generate Analitycs configuration file.
   ansible.builtin.template:
-    src: "./templates/config/test.j2"
+    src: ./templates/config/test.j2
     dest: "/tmp/AS1.xml"
     mode: 0644
