@@ -5,6 +5,6 @@
 - name: Generate Analitycs configuration file.
   ansible.builtin.template:
     src: ./templates/config/ASConfig.j2
-    dest: "./templates/generated/ASConfig.xml"
+    dest: ./templates/generated/ASConfig.xml
     owner: root
     mode: 0644
