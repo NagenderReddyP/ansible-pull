@@ -282,7 +282,7 @@ Master configuration file for all IBM Cognos components.
        access to at least one Web server that supports chunking outside of the firewall.
        The http or https protocol prefix indicates if SSL is required.  -->
   <crn:parameter name="sdk">
-    <crn:value xsi:type="xsd:anyURI">http://ip-10-56-3-137.eu-west-1.compute.internal:9300/bi/v1/disp</crn:value>
+    <crn:value xsi:type="xsd:anyURI">{{ CONTENT_MANAGER_URI }}</crn:value>
   </crn:parameter>
   <!-- contentManagers: Specifies one or more URIs to the Content Manager.  -->
   <!-- Use the 'https' or 'http' protocol to select SSL or non-SSL communication. This property
