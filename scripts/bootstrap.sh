@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+#set -ex
 
 #  --------------------------------------------
 #  ------ Preparing a naked RHEL8 ec2 ---------
@@ -11,20 +11,17 @@ INSTANCE_ID="$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://instance-dat
         CLI="/aws/dist/aws"
         Env=$($CLI ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=AwsEnv"  --region $REGION --output=text |cut -f5| awk '{print tolower($0)}')
         Prj=$($CLI ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=Project" --region $REGION --output=text |cut -f5| awk '{print tolower($0)}')
-
 #dnf update -y
 
 # Disable selinux (needed for Cognos)
 sed -i 's/^SELINUX=.*$/SELINUX=disabled/' /etc/selinux/config
-setenforce 0
-
+setenforce 0 || true
 dnf install -y unzip jq ansible
 
 # -----------------------------------------------------------
 # Download and install AWS BINARIES (ssm, cloudwatch, awscli)
 # -----------------------------------------------------------
 for File in \
-#awscli.amazonaws.com/awscli-exe-linux-x86_64.zip \
 s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm \
 s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 do
@@ -43,7 +40,7 @@ done
 # -----------------------------------
 # AWSCI SETUP
 # -----------------------------------
-sh /aws/install
+#sh /aws/install
 
 # -----------------------------------
 # SSM START
@@ -81,7 +78,7 @@ CM_EFS_ParameterStore="creport-${Env}-EFS-content-mgr"
 CM_ALB_endpoint=$($CLI ssm get-parameter --name "${CM_ALB_ParameterStore}" --with-decryption --region "$REGION" --query Parameter.Value --output text)
 CM_EFS_endpoint=$($CLI ssm get-parameter --name "${CM_EFS_ParameterStore}" --with-decryption --region "$REGION" --query Parameter.Value --output text)
 
-FQDN=$(hostname -F)
+FQDN=$(hostname -f)
 IPV4=$(hostname -I)
 
 $CLI --region $REGION ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values=creport-${Env}-EC2-analytics" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort > /tmp/IPs.v4
