@@ -78,24 +78,47 @@
 ##################################################################################################
 # Here is the logic to identify the Analytics Server based on the IP
 # AS1Config.xml or AS2Config.xml
-- name: Get all instances of Analytic servers using tags
-  shell: /usr/local/bin/aws ec2 describe-tags --region {{ aws_region }} --filters "Name=key,Values=AppComponent" "Name=resource-type,Values=instance" "Name=value,Values=analytics"  --query "Tags[*].ResourceId" --output json
-  register: analytics_instances
-- set_fact:
-     ais: "{{ analytics_instances.stdout }}"
-- name: Identify the server using the local IP and the order 
-  shell: /usr/local/bin/aws --region {{ aws_region }} ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values={{ ais }}" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort | grep -n $(hostname -i) | cut -d":" -f1
-  register: selected_as
-- name: Print
-  debug:
-    msg: "This Analytics server has been identified as: AS{{ selected_as.stdout }}"
-- set_fact:
-     asNumber: "{{ selected_as.stdout }}"
+#- name: Get all instances of Analytic servers using tags
+#  shell: /usr/local/bin/aws ec2 describe-tags --region {{ aws_region }} --filters "Name=key,Values=AppComponent" "Name=resource-type,Values=instance" "Name=value,Values=analytics"  --query "Tags[*].ResourceId" --output json
+#  register: analytics_instances
+#- set_fact:
+#     ais: "{{ analytics_instances.stdout }}"
+#- name: Identify the server using the local IP and the order 
+#  shell: /usr/local/bin/aws --region {{ aws_region }} ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values={{ ais }}" --query 'Reservations[*].Instances[*].[PrivateIpAddress]' --output text | sort | grep -n $(hostname -i) | cut -d":" -f1
+#  register: selected_as
+#- name: Print
+#  debug:
+#    msg: "This Analytics server has been identified as: AS{{ selected_as.stdout }}"
+#- set_fact:
+#     asNumber: "{{ selected_as.stdout }}"
 ##################################################################################################      
-- name: Copy the Config file {{ component_type }}1Config.xml from S3 bucket to {{ configuration_folder }}
-  shell: "/usr/local/bin/aws s3 cp {{ s3_bucket_configuration_files }}/{{ component_type }}{{ asNumber }}Config.xml {{ configuration_folder }}/{{ item }}"
-  with_items:
-    - "cogstartup.xml"
+#- name: Copy the Config file {{ component_type }}1Config.xml from S3 bucket to {{ configuration_folder }}
+#  shell: "/usr/local/bin/aws s3 cp {{ s3_bucket_configuration_files }}/{{ component_type }}{{ asNumber }}Config.xml {{ configuration_folder }}/{{ item }}"
+#  with_items:
+#    - "cogstartup.xml"
+- include: tasks/installation/apply_template.yml
+  vars:
+    - dispatcher_port: 9300
+    - external_dispatcher_uri: 'http://ip-10-56-3-137.eu-west-1.compute.internal:{{ DISPATCHER_PORT }}/p2pd/servlet/dispatch' #- Line 193
+    - internal_dispatcher_uri: 'http://ip-10-56-3-137.eu-west-1.compute.internal:{{ DISPATCHER_PORT }}/p2pd/servlet/dispatch' #- Line 205
+    - dispatcher_uri_4_external_apps: 'http://ip-10-56-3-137.eu-west-1.compute.internal:{{ DISPATCHER_PORT }}/bi/v1/disp' #- Line 285
+    - content_manager_uri: 'http://internal-creport-dev-lb-content-mgr-1585325614.eu-west-1.elb.amazonaws.com:{{ DISPATCHER_PORT }}/p2pd/servlet' #- Line 295
+    - group_name: 'GRP_CREPORTDEV' #- Line 359 ( we can parameterize with environment - creport-dev)
+    - group_contact_host: 'ip-10-56-3-133.eu-west-1.compute.internal' #- CM IP is being retrieved despite mentioning ALB - Line 377
+    - member_coordination_host: 'ip-10-56-3-137.eu-west-1.compute.internal' #- Line 401
+    - dns_name: 'ip-10-56-3-137.eu-west-1.compute.internal' #- Line 1894
+    - ip_address: '10.56.3.137' #- Line 1903
+    - database_port: 23000 #- Line 2253
+    - DATABASE_URI: creportdev.cit9nbofg1l2.eu-west-1.rds.amazonaws.com:{{ DATABASE_PORT }}
+    - DB_USER: 'creport' #- Line 2263
+    - DB_PWD: 'GsoHnXHnvbSFcKKrcoit' #- Line 2264
+    - SERVICE_NAME: 'creport' #- Line 2272
+    - TEMPLATE_SRC: ''
+    - TEMPLATE_DST: ''
+    - OWNER: ''
+    - PERMISSIONS: ''
+
+    file_dst: "{{ configuration_folder }}/cogstartup.xml"
 
 - name: Set up owner and permissions for ojdbc8.jar file      
   file: 
