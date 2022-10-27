@@ -68,7 +68,7 @@ systemctl start amazon-cloudwatch-agent
 
 # Environnement variables needed for the Cognos Playbook
 InstanceName=$($CLI ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=Name" --region $REGION --output=text |cut -f5 )
-PlaybookRpo="https://github.com/esteban-santiago/ansible-pull.git"
+PlaybookRpo="https://github.com/esteban-santiago/creport.git"
 
 #Compose the parameter we want to search the value in the AWS ssm Parameter Store
 CM_ALB_ParameterStore="creport-${Env}-ALB-content-mgr"

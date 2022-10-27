@@ -2,9 +2,9 @@
 #
 #
 #############################################################################################################################
-- name: Generate Analitycs configuration file.
+- name: Apply jinja template {{ template }} to {{ file_dst}} configuration file.
   ansible.builtin.template:
-    src: ./templates/config/ASConfig.j2
-    dest: /tmp/ASConfig.xml
-    owner: root
-    mode: 0644
+    src: {{ template }}
+    dest: {{ file_dst}}
+    owner: {{ owner }}
+    mode: {{ mode }}

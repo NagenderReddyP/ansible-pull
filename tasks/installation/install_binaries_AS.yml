@@ -109,16 +109,14 @@
     - dns_name: 'ip-10-56-3-137.eu-west-1.compute.internal' #- Line 1894
     - ip_address: '10.56.3.137' #- Line 1903
     - database_port: 23000 #- Line 2253
-    - DATABASE_URI: creportdev.cit9nbofg1l2.eu-west-1.rds.amazonaws.com:{{ DATABASE_PORT }}
-    - DB_USER: 'creport' #- Line 2263
-    - DB_PWD: 'GsoHnXHnvbSFcKKrcoit' #- Line 2264
-    - SERVICE_NAME: 'creport' #- Line 2272
-    - TEMPLATE_SRC: ''
-    - TEMPLATE_DST: ''
-    - OWNER: ''
-    - PERMISSIONS: ''
-
-    file_dst: "{{ configuration_folder }}/cogstartup.xml"
+    - database_uri: creportdev.cit9nbofg1l2.eu-west-1.rds.amazonaws.com:{{ DATABASE_PORT }}
+    - db_user: 'creport' #- Line 2263
+    - db_pwd: 'GsoHnXHnvbSFcKKrcoit' #- Line 2264
+    - service_name: 'creport' #- Line 2272
+    - template: '../templates/config/ASConfig.j2'
+    - file_dst: "{{ configuration_folder }}/cogstartup.xml"
+    - owner: 'root'
+    - mode: '0644'
 
 - name: Set up owner and permissions for ojdbc8.jar file      
   file: 
